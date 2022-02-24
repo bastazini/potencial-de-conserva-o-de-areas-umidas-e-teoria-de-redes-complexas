@@ -16,6 +16,15 @@ eq.numbers=exp(vegan::diversity(habitat, "shannon")); eq.numbers
 ##copy and paste to excel, to organize data
 clipr::write_clip(eq.numbers)
 
+####calculating nod redundancy
+library(networktools)
+
+teste <- goldbricker(t(rede), threshold=0.30)
+plot(teste)
+teste1 <- net_reduce(data=t(rede), badpairs=teste,method="best_goldbricker")
+
+
+
 
 #### Calcularing IVI
 My_graph <- graph_from_incidence_matrix(rede,weighted = TRUE)
