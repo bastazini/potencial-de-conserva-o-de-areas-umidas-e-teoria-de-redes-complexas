@@ -19,18 +19,21 @@ clipr::write_clip(eq.numbers)
 ####calculating nod redundancy
 library(networktools)
 
-teste <- goldbricker(t(rede), threshold=0.30)
+####Node redundancy
+teste <- goldbricker(t(rede), threshold = 0.25, corMin = 0.5)
 plot(teste)
+summary(teste)
 teste1 <- net_reduce(data=t(rede), badpairs=teste,method="best_goldbricker")
 
-
+assortativity_degree
+assortativity_degree(My_graph,directed = FALSE)
 
 
 #### Calcularing IVI
 My_graph <- graph_from_incidence_matrix(rede,weighted = TRUE)
 Graph_IVI <- ivi(graph = My_graph, mode = "all")
-ivi=Graph_IVI[1:48]
-clipr::write_clip(ivi.aves)
+ivi=Graph_IVI[1:46]
+clipr::write_clip(ivi)
 cent_network.vis(graph = My_graph, cent.metric = Graph_IVI,
                  legend.title = "Valor Integrado de Influencia",
                  plot.title = "", layout= "kk", dist.power=2, legend.position="right", boxed.legend=FALSE, show.labels=FALSE, 
@@ -55,10 +58,9 @@ edit(ivi.order)
 
 ###Robustness
 ##specify "ext.row" based on the IVI rank vector
-rob =second.extinct(rede, participant="lower", method="external",ext.row= c(14, 39.5, 13, 5, 33, 27, 41, 10, 9, 1, 22, 37, 25, 
-                                                                               7, 26, 38, 21, 39.5, 35.5, 28, 24, 42.5, 42.5, 18, 35.5, 4, 20, 
-                                                                               47.5, 45, 29, 44, 47.5, 15, 46, 32, 23, 30, 2, 8, 19, 6, 17, 
-                                                                           11, 31, 3, 34, 12, 16))
+rob =second.extinct(rede, participant="lower", method="external",ext.row= c(17, 18, 10, 30, 12, 2, 8, 11, 7, 19, 3, 4, 16, 22, 
+                                                                            6, 1, 28.5, 28.5, 23.5, 15, 26.5, 26.5, 5, 13, 14, 9, 25, 23.5, 
+                                                                            20, 21))
 rob.random=  second.extinct(rede, participant="lower", method="random", nrep=1000,details=FALSE)  
 ###Robustness
 robustness(rob)
