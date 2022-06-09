@@ -1,0 +1,16 @@
+require(sjPlot)
+
+dados=read.table(pipe("pbpaste"), sep="\t", header=T, row.names=1);dados
+names(dados)
+
+
+mod=lm(IVI ~  Habitat.Diversity+
+             Distance.Nearest.Patch+Area, data=dados)
+summary(mod)
+
+plot_model(mod,type = "std", colors="black")
+
+ 
+
+
+
