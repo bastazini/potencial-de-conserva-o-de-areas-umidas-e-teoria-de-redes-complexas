@@ -1,3 +1,5 @@
+###This is a modification from slope.bipartite taken from Bastazini et al. 2019. Environmental Conservation 46.1 (2019): 52-58.
+
 fit.hyperbolica=function (object, plot.it = TRUE, ...) 
 {
   if (class(object) != "bipartite") 
