@@ -3,6 +3,7 @@ require(bipartite)
 require(igraph)
 require(influential)
 require(vegan)
+require(networktools)
 
 rm(list=ls())
 ###Import data
@@ -16,15 +17,13 @@ eq.numbers=exp(vegan::diversity(habitat, "shannon")); eq.numbers
 ##copy and paste to excel, to organize data
 clipr::write_clip(eq.numbers)
 
-####calculating nod redundancy
-library(networktools)
-
 ####Node redundancy
 teste <- goldbricker(t(rede), threshold = 0.25, corMin = 0.5)
 plot(teste)
 summary(teste)
 teste1 <- net_reduce(data=t(rede), badpairs=teste,method="best_goldbricker")
 
+####Assortativity_degree
 assortativity_degree
 assortativity_degree(My_graph,directed = FALSE)
 
@@ -34,6 +33,8 @@ My_graph <- graph_from_incidence_matrix(rede,weighted = TRUE)
 Graph_IVI <- ivi(graph = My_graph, mode = "all")
 ivi=Graph_IVI[1:46]
 clipr::write_clip(ivi)
+
+#### Plotting (change shape parameter for each network)
 cent_network.vis(graph = My_graph, cent.metric = Graph_IVI,
                  legend.title = "Valor Integrado de Influencia",
                  plot.title = "", layout= "kk", dist.power=2, legend.position="right", boxed.legend=FALSE, show.labels=FALSE, 
@@ -51,7 +52,7 @@ cent_network.vis(graph = My_graph, cent.metric = Graph_IVI,
                               "square", "square", "square", "square", "square", "square", "square", 
                               "square", "square", "square"))
                
-                 ###Order IVI
+###Order IVI
 #negative sign serves as a trick to rank IVI on descending order
 ivi.order=rank(-ivi);ivi.order
 edit(ivi.order)
@@ -66,6 +67,7 @@ rob.random=  second.extinct(rede, participant="lower", method="random", nrep=100
 robustness(rob)
 robustness(rob.random)
 ### this fucntion plots the ATC and calculates its exponet
+
 ###This is a modification from slope.bipartite taken from Bastazini et al. 2019. Environmental Conservation 46.1 (2019): 52-58.
 source("fit.hyperbolic.R")
 par(mfrow=c(1,2))
