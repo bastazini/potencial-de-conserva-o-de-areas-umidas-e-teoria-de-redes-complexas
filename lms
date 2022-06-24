@@ -1,17 +1,41 @@
-require(sjPlot)
-
 dados=read.table(pipe("pbpaste"), sep="\t", header=T, row.names=1);dados
 names(dados)
 
 
-mod=lm(IVI ~  Habitat.Diversity+
-             Distance.Nearest.Patch+Area, data=dados)
+dados1=as.data.frame(scale(dados))
+mod=lm(IVI ~  Habitat.Diversity+ Distance.Nearest.Patch+ Area, data=dados1)
 summary(mod)
+confint(mod)
 
-require(sjPlot)
-plot_model(mod,type = "std", colors="black",ci.lvl=0.95)
 
- 
+###set the paramters
+par(mar=c(4,10,1,1))
+### Juncais
+x=c(1.2,2.2,3.2)
+avg=c(4.805e-01,-2.097e-01,7.115e-02)
+lower=c(0.2251292,-0.4647384,-0.1800679)
+upper=c(0.73588837,0.04531487,0.32236316)
+
+## Sangradouros
+x1=c(0.8,1.8,2.8)
+avg1=c(4.095e-01,0.025,0.324)
+lower1=c(0.02751396,-0.30315984,-0.05027690)
+upper1=c(0.7915223,0.3535646,0.6987655)
+
+plot(1, type="n", ylab="", yaxt="n", xlab="Estimativa dos parâmetros (IC95%)", xlim=c(-1, 1), ylim=c(0, 3.5), main="")
+points(avg,x, pch=16,cex=1)
+arrows(lower, x, upper,  x, length=0.05, angle=90, code=3,lwd=2.5)
+abline(v=0,lty=2, lwd=3,col="red")
+points(avg1,x1, pch=16,cex=1, col="blue")
+arrows(lower1, x1, upper1,  x1, length=0.05, angle=90, code=3,lwd=2.5, col="blue",lty=2)
+axis(side=2,at=x,label=c("Área","Distância para mancha
+mais próxima", "Diversidade de hábitat"),cex.lab=14, las=2,xlim=c(0.67,0.83))
+x=locator(1)
+legend(x, legend=c("Juncais", "Sangradouros"),
+       col=c("black", "blue"), lty=1:2, box.lty=0,cex=1)
+text(locator(1),"*", cex=1.5)
+
+
 
 
 
