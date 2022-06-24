@@ -8,8 +8,8 @@ mod=lm(IVI ~  Habitat.Diversity+
              Distance.Nearest.Patch+Area, data=dados)
 summary(mod)
 
- require(sjPlot)
-plot_model(mod,type = "std", colors="black")
+require(sjPlot)
+plot_model(mod,type = "std", colors="black",ci.lvl=0.95)
 
  
 
