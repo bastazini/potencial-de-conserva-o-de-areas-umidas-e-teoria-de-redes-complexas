@@ -1,2 +1,2 @@
 Some of the R code used in "Identificando o potencial de conservação de áreas úmidas usando ferramentas da teoria de redes complexas"
-Bastazini et al. in press. IN: Gonçalves, M.S. et al. "Biodiversidade e conservação de ecossistemas aquáticos do sul do Brasil"
+Bastazini et al. in press. In: Gonçalves, MSS.; Bastazini, VAG; Andretti, CB; Lanés, LEK; Volcan, MV. (Orgs). Ecologia e Conservação de Ecossistemas Aquáticos do Sul do Brasil. Pelotas: USEB. Vol 1. 2023 (no prelo).
