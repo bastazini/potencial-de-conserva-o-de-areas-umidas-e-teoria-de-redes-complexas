@@ -1,3 +1,5 @@
+rm(list=ls())
+
 ###packages
 require(bipartite)
 require(igraph)
@@ -5,7 +7,6 @@ require(influential)
 require(vegan)
 require(networktools)
 
-rm(list=ls())
 ###Import data
 #Load data
 rede=read.table(pipe("pbpaste"), sep="\t", header=T,row.names=1);rede
@@ -14,6 +15,7 @@ dim(rede)
 ##Calculate habitat diversity using equivalent numbers 
 habitat=read.table(pipe("pbpaste"), sep="\t", header=T);habitat
 eq.numbers=exp(vegan::diversity(habitat, "shannon")); eq.numbers 
+
 ##copy and paste to excel, to organize data
 clipr::write_clip(eq.numbers)
 
